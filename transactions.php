@@ -5,7 +5,7 @@ include 'includes/header.php';
 include 'includes/sidebar.php';
 
 // Get all parties
-$parties_query = "SELECT id, name FROM parties";
+$parties_query = "SELECT DISTINCT a.id, a.name FROM `parties` a JOIN sales_orders b ON a.id = b.party_id WHERE NOT b.payment_status = 'completed'";
 $parties_result = mysqli_query($conn, $parties_query);
 
 // Get all sales orders

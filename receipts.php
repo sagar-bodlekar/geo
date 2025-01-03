@@ -5,7 +5,7 @@ include 'includes/header.php';
 include 'includes/sidebar.php';
 
 // Get all suppliers
-$suppliers_query = "SELECT id, name FROM suppliers";
+$suppliers_query = "SELECT DISTINCT a.id, a.name FROM `suppliers` a JOIN purchase_orders b ON a.id = b.supplier_id WHERE NOT b.payment_status = 'completed'";
 $suppliers_result = mysqli_query($conn, $suppliers_query);
 
 // Get all purchase orders
