@@ -16,10 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $check_result = mysqli_query($conn, $check_query);
     $check_row = mysqli_fetch_assoc($check_result);
 
-    if ($check_row['count'] > 0) {
-        $response['status'] = 'error';
-        $response['message'] = 'SKU already exists';
-    } else {
+    // if ($check_row['count'] > 0) {
+    //     $response['status'] = 'error';
+    //     $response['message'] = 'SKU already exists';
+    // } else {
         $query = "INSERT INTO products (name, sku, category, unit_id, purchase_price, selling_price) 
                   VALUES ('$name', '$sku', '$category', '$unit_id', '$purchase_price', '$selling_price')";
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $response['status'] = 'error';
             $response['message'] = 'Error: ' . mysqli_error($conn);
         }
-    }
+    // }
 } else {
     $response['status'] = 'error';
     $response['message'] = 'Invalid request method';
