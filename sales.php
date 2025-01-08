@@ -66,7 +66,7 @@ $units_result = mysqli_query($conn, $units_query);
                             <div class="col-md-8">
                                 <!-- Sales Items Table -->
                                 <div class="table-responsive mt-4">
-                                    <table class="table table-bordered" id="salesItems">
+                                    <table class="table table-bordered add_product_sale" id="salesItems">
                                         <thead>
                                             <tr>
                                                 <th>Product</th>
@@ -78,6 +78,7 @@ $units_result = mysqli_query($conn, $units_query);
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <!-- create dynamic sales body-->
                                             <tr>
                                                 <td>
                                                     <select class="form-control product-select" name="items[0][product_id]" required>
@@ -346,7 +347,7 @@ $units_result = mysqli_query($conn, $units_query);
                         </table>
                     </div>
                 </div>
-                
+
                 <h6 class="mt-4">Order Items</h6>
                 <div class="table-responsive">
                     <table class="table table-bordered">
@@ -425,7 +426,9 @@ $units_result = mysqli_query($conn, $units_query);
             $.ajax({
                 type: 'POST',
                 url: 'ajax/get_sales_order_details.php',
-                data: { order_id: orderId },
+                data: {
+                    order_id: orderId
+                },
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data.status == 'success') {
@@ -433,22 +436,28 @@ $units_result = mysqli_query($conn, $units_query);
                         $('#view_order_id').text(data.order.id);
                         $('#view_order_date').text(data.order.order_date);
                         $('#view_total_amount').text('₹' + parseFloat(data.order.total_amount).toFixed(2));
-                        
+
                         // Set payment status with badge
                         var statusBadgeClass = '';
-                        switch(data.order.payment_status) {
-                            case 'pending': statusBadgeClass = 'badge-warning'; break;
-                            case 'completed': statusBadgeClass = 'badge-success'; break;
-                            case 'partial': statusBadgeClass = 'badge-info'; break;
+                        switch (data.order.payment_status) {
+                            case 'pending':
+                                statusBadgeClass = 'badge-warning';
+                                break;
+                            case 'completed':
+                                statusBadgeClass = 'badge-success';
+                                break;
+                            case 'partial':
+                                statusBadgeClass = 'badge-info';
+                                break;
                         }
                         $('#view_payment_status').html(`<span class="badge ${statusBadgeClass}">${data.order.payment_status}</span>`);
-                        
+
                         // Fill party information
                         $('#view_party_name').text(data.party.name);
                         $('#view_contact_person').text(data.party.contact_person);
                         $('#view_phone').text(data.party.phone);
                         $('#view_email').text(data.party.email);
-                        
+
                         // Fill order items
                         var itemsHtml = '';
                         data.items.forEach(function(item) {
@@ -463,7 +472,7 @@ $units_result = mysqli_query($conn, $units_query);
                             `;
                         });
                         $('#view_order_items').html(itemsHtml);
-                        
+
                         // Fill payment history
                         var paymentsHtml = '';
                         if (data.payments.length > 0) {
@@ -482,7 +491,7 @@ $units_result = mysqli_query($conn, $units_query);
                             paymentsHtml = '<tr><td colspan="5" class="text-center">No payment records found</td></tr>';
                         }
                         $('#view_payment_history').html(paymentsHtml);
-                        
+
                         $('#viewOrderModal').modal('show');
                     }
                 }
@@ -501,7 +510,9 @@ $units_result = mysqli_query($conn, $units_query);
             $.ajax({
                 type: 'POST',
                 url: 'ajax/sales_order_delete.php',
-                data: { order_id: orderId },
+                data: {
+                    order_id: orderId
+                },
                 success: function(response) {
                     var data = JSON.parse(response);
                     if (data.status == 'success') {
@@ -530,7 +541,7 @@ $units_result = mysqli_query($conn, $units_query);
                                 $.ajax({
                                     type: 'POST',
                                     url: 'ajax/sales_order_delete.php',
-                                    data: { 
+                                    data: {
                                         order_id: orderId,
                                         confirmed: true
                                     },
@@ -586,6 +597,7 @@ $units_result = mysqli_query($conn, $units_query);
                 }
             });
         });
+
 
         // Add new item row
         $('#addItem').click(function() {

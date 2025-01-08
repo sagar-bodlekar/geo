@@ -1,7 +1,7 @@
 <?php
 include '../config/database.php';
 
-$query = "SELECT id, CONCAT(name, ' (', code, ')') as text 
+$query = "SELECT id, CONCAT(name, ' (', sku, ')') as text 
           FROM products 
           ORDER BY name ASC";
 
