@@ -19,31 +19,31 @@ This project is very basic, easy to use, and includes the following key sections
 * **Supplier Section**: Allows adding, editing, deleting, and updating supplier information.
 
 
-![Supplier](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/supplier.png)
+![Supplier](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/supplier.png)
 
 ## Party Section
 * **Party Section**: Similar functionalities as the supplier section for managing party details.
 
-![Party](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/party.png)
+![Party](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/party.png)
 
 ## Purchase Section
 * **Purchase Section**: Create and manage new purchases and handle payment details in the "Purchase Receipts" section.
 
-![Purchase](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/purchase.png)
+![Purchase](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/purchase.png)
 
-![Purchase Details](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/PurchaseOrderDetails.png)
+![Purchase Details](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/PurchaseOrderDetails.png)
 
 ## Sales Section
 * **Sales Section**: Generate sales to parties and manage sales payments in the "Sales Transaction" section and ganrate recipts in pdf download of each sales order.
 
-![Purchase Details](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/salesdetails.png)
+![Purchase Details](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/salesdetails.png)
 
-![Purchase Details](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/salesreciptspdf.png)
+![Purchase Details](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/salesreciptspdf.png)
 
 ## Expenses Section
 * **Expenses Section**: A simple section to record and manage additional expenses, which are reflected on the Dashboard.
 
-![Expenses](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/expenses.png)
+![Expenses](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/expenses.png)
 ## Installation
 
 Clone the repository:
@@ -97,7 +97,7 @@ git push origin feature-name
 ```
 5. _Submit a pull request for review._
 
-![Logo](https://github.com/sagar-bodlekar/geo/blob/personal-dev/img/favicon/android-chrome-512x512.png)
+![Logo](https://github.com/sagar-bodlekar/geo/blob/master/img/favicon/android-chrome-512x512.png)
 
 
 
