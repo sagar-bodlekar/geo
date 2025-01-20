@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inventory Management System</title>
-
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -19,7 +18,9 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
-
+    <!-- feb icon add -->
+    <link rel="shortcut icon" type="image/x-icon" href="http://localhost/geo/img/favicon/android-chrome-512x512.png"/>
+    
     <!-- Custom CSS for shadows -->
     <style>
         .custom-shadow-sm {

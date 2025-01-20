@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = mysqli_real_escape_string($conn, $_POST['id']);
 
     // Check if supplier has any associated products
-    $check_query = "SELECT COUNT(*) as count FROM products WHERE supplier_id = $id";
+    $check_query = "SELECT COUNT(*) as count FROM purchase_orders WHERE supplier_id = $id";
     $check_result = mysqli_query($conn, $check_query);
     $check_row = mysqli_fetch_assoc($check_result);
 

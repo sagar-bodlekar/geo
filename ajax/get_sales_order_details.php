@@ -24,12 +24,13 @@ if (isset($_POST['order_id'])) {
                 'name' => $row['name'],
                 'contact_person' => $row['contact_person'],
                 'phone' => $row['phone'],
-                'email' => $row['email']
+                'email' => $row['email'],
+                'address' => $row['address']
             ]
         ];
         
         // Get order items
-        $items_query = "SELECT soi.*, p.name as product_name, u.name as unit_name 
+        $items_query = "SELECT soi.*, p.name as product_name, p.sku as sku, u.name as unit_name 
                        FROM sales_order_items soi
                        LEFT JOIN products p ON soi.product_id = p.id
                        LEFT JOIN units u ON soi.unit_id = u.id
@@ -40,6 +41,7 @@ if (isset($_POST['order_id'])) {
         while ($item = mysqli_fetch_assoc($items_result)) {
             $items[] = [
                 'product_name' => $item['product_name'],
+                'sku' => $item['sku'],
                 'quantity' => $item['quantity'],
                 'unit_name' => $item['unit_name'],
                 'unit_price' => $item['unit_price'],

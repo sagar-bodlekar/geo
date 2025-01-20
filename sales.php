@@ -80,6 +80,7 @@ $units_result = mysqli_query($conn, $units_query);
                                         <tbody>
                                             <!-- create dynamic sales body-->
                                             <tr>
+                                                <!-- selector -->
                                                 <td>
                                                     <select class="form-control product-select" name="items[0][product_id]" required>
                                                         <option value="">Select Product</option>
@@ -95,9 +96,11 @@ $units_result = mysqli_query($conn, $units_query);
                                                         <?php } ?>
                                                     </select>
                                                 </td>
+                                                <!-- quantity -->
                                                 <td>
                                                     <input type="number" step="0.01" class="form-control quantity" name="items[0][quantity]" required>
                                                 </td>
+                                                <!-- units -->
                                                 <td>
                                                     <select class="form-control unit-select" name="items[0][unit_id]" required>
                                                         <option value="">Select Unit</option>
@@ -111,17 +114,21 @@ $units_result = mysqli_query($conn, $units_query);
                                                         <?php } ?>
                                                     </select>
                                                 </td>
+                                                <!-- price -->
                                                 <td>
                                                     <input type="number" step="0.01" class="form-control price" name="items[0][unit_price]" required>
                                                 </td>
+                                                <!-- total price -->
                                                 <td>
                                                     <input type="number" step="0.01" class="form-control total" name="items[0][total_price]" readonly>
                                                 </td>
+                                                <!-- remove button -->
                                                 <td>
                                                     <button type="button" class="btn btn-danger btn-sm remove-item"><i class="fas fa-trash"></i></button>
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <!-- grand total section -->
                                         <tfoot>
                                             <tr>
                                                 <td colspan="4" class="text-right"><strong>Grand Total:</strong></td>
@@ -275,8 +282,9 @@ $units_result = mysqli_query($conn, $units_query);
                                         <button type="button" class="btn btn-sm btn-info view-order" data-id="<?php echo $order['id']; ?>">
                                             <i class="fas fa-eye"></i>
                                         </button>
+                                        <!-- download button -->
                                         <button type="button" class="btn btn-sm btn-primary edit-order" data-id="<?php echo $order['id']; ?>">
-                                            <i class="fas fa-edit"></i>
+                                            <i class="fas fa-download"></i>
                                         </button>
                                         <button type="button" class="btn btn-sm btn-danger delete-order" data-id="<?php echo $order['id']; ?>">
                                             <i class="fas fa-trash"></i>
@@ -500,9 +508,81 @@ $units_result = mysqli_query($conn, $units_query);
 
         // Edit Order
         $(document).on('click', '.edit-order', function() {
-            var orderId = $(this).data('id');
-            // Add your edit logic here
+            var orderId = $(this).data('id'); // Button ka Order ID fetch karein
+
+            // Pehla AJAX call: Sales Order Details fetch karein
+            $.ajax({
+                type: 'POST',
+                url: 'ajax/get_sales_order_details.php', // Sales order details ka backend
+                data: {
+                    order_id: orderId
+                }, // Order ID pass karein
+                success: function(response) {
+                    var data = JSON.parse(response);
+                    if (data.status === 'success') {
+                        // Direct browser to invoice.php with data binding
+                        var jsonData = encodeURIComponent(response); // Encode JSON data for URL
+                        window.location.href = "invoiceformat/invoice3.php?jsonData=" + jsonData;
+                    } else {
+                        alert('Order details not found.');
+                    }
+                    // if (data.status == 'success') {
+                    //     // Doosra AJAX call: Invoice generate karein
+                    //     $.ajax({
+                    //         url: "invoiceformat/invoice3.php", // Invoice generation ka backend
+                    //         type: "POST",
+                    //         data: {
+                    //             jsonData: response
+                    //         }, // Sales order ka data pass karein
+                    //         success: function(pdfUrl) {
+                    //             // PDF ko nayi tab me open karein
+                    //             // window.open(pdfUrl, "_blank");
+                    //         },
+                    //         error: function() {
+                    //             alert("Failed to generate PDF.");
+                    //         },
+                    //     });
+                    // } else {
+                    //     alert("Sales order details fetch karne me problem hai.");
+                    // }
+                },
+                error: function() {
+                    alert("AJAX request failed.");
+                },
+            });
         });
+        // $(document).on('click', '.edit-order', function() {
+        //     var orderId = $(this).data('id');
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: 'ajax/get_sales_order_details.php',
+        //         data: {
+        //             order_id: orderId
+        //         },
+        //         success: function(response) {
+        //             var data = JSON.parse(response);
+        //             if (data.status == 'success') {
+        //                 $.ajax({
+        //                     url: "invoiceformat/invoice.php", // PHP file to generate PDF
+        //                     type: "POST",
+        //                     data: {
+        //                         jsonData: response
+        //                     }, // Pass JSON data
+        //                     success: function(pdfUrl) {
+        //                         // Open the generated PDF in a new tab
+        //                         // window.open(pdfUrl, "_blank");
+        //                         return pdfUrl;
+        //                     },
+        //                     error: function() {
+        //                         alert("Failed to generate PDF.");
+        //                     },
+        //                 });
+        //             }
+        //         }
+        //     });
+        //     alert("That time not yet editable😋");
+        //     // Add your edit logic here
+        // });
 
         // Delete Order
         $(document).on('click', '.delete-order', function() {
@@ -605,12 +685,13 @@ $units_result = mysqli_query($conn, $units_query);
             var newRow = $('#salesItems tbody tr:first').clone();
 
             // Update name attributes
+            // newRow.find("span.select2 ").remove();
+            // newRow.find("select").select2();
             newRow.find('.product-select').attr('name', 'items[' + index + '][product_id]').val('');
             newRow.find('.quantity').attr('name', 'items[' + index + '][quantity]').val('');
             newRow.find('.unit-select').attr('name', 'items[' + index + '][unit_id]').val('');
             newRow.find('.price').attr('name', 'items[' + index + '][unit_price]').val('');
             newRow.find('.total').attr('name', 'items[' + index + '][total_price]').val('');
-
             $('#salesItems tbody').append(newRow);
         });
 
