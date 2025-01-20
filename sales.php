@@ -522,67 +522,16 @@ $units_result = mysqli_query($conn, $units_query);
                     if (data.status === 'success') {
                         // Direct browser to invoice.php with data binding
                         var jsonData = encodeURIComponent(response); // Encode JSON data for URL
-                        window.location.href = "invoiceformat/invoice3.php?jsonData=" + jsonData;
+                        window.location.href = "invoiceformat/invoice.php?jsonData=" + jsonData;
                     } else {
                         alert('Order details not found.');
                     }
-                    // if (data.status == 'success') {
-                    //     // Doosra AJAX call: Invoice generate karein
-                    //     $.ajax({
-                    //         url: "invoiceformat/invoice3.php", // Invoice generation ka backend
-                    //         type: "POST",
-                    //         data: {
-                    //             jsonData: response
-                    //         }, // Sales order ka data pass karein
-                    //         success: function(pdfUrl) {
-                    //             // PDF ko nayi tab me open karein
-                    //             // window.open(pdfUrl, "_blank");
-                    //         },
-                    //         error: function() {
-                    //             alert("Failed to generate PDF.");
-                    //         },
-                    //     });
-                    // } else {
-                    //     alert("Sales order details fetch karne me problem hai.");
-                    // }
                 },
                 error: function() {
                     alert("AJAX request failed.");
                 },
             });
         });
-        // $(document).on('click', '.edit-order', function() {
-        //     var orderId = $(this).data('id');
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: 'ajax/get_sales_order_details.php',
-        //         data: {
-        //             order_id: orderId
-        //         },
-        //         success: function(response) {
-        //             var data = JSON.parse(response);
-        //             if (data.status == 'success') {
-        //                 $.ajax({
-        //                     url: "invoiceformat/invoice.php", // PHP file to generate PDF
-        //                     type: "POST",
-        //                     data: {
-        //                         jsonData: response
-        //                     }, // Pass JSON data
-        //                     success: function(pdfUrl) {
-        //                         // Open the generated PDF in a new tab
-        //                         // window.open(pdfUrl, "_blank");
-        //                         return pdfUrl;
-        //                     },
-        //                     error: function() {
-        //                         alert("Failed to generate PDF.");
-        //                     },
-        //                 });
-        //             }
-        //         }
-        //     });
-        //     alert("That time not yet editable😋");
-        //     // Add your edit logic here
-        // });
 
         // Delete Order
         $(document).on('click', '.delete-order', function() {
