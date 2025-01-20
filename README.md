@@ -97,7 +97,7 @@ git push origin feature-name
 ```
 5. _Submit a pull request for review._
 
-![Logo](https://github.com/sagar-bodlekar/geo/blob/master/img/favicon/android-chrome-512x512.png)
+![Logo](https://github.com/sagar-bodlekar/geo/blob/master/img/favicon/apple-touch-icon.png)
 
 
 
