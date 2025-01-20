@@ -12,7 +12,7 @@ This project is very basic, easy to use, and includes the following key sections
 
 ## Dashboard
 
-![Dashboard](https://github.com/sagar-bodlekar/geo/blob/personal-dev/screenshot/Dashboard.png)
+![Dashboard](https://github.com/sagar-bodlekar/geo/blob/master/screenshot/Dashboard.png)
 
 
 ## Supplier Section
